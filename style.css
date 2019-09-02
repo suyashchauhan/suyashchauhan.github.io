@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.Main-text
+{
+    color:white;
+    align-self: flex-end;
+    flex: 1;
+    justify-self: flex-end;
+    font-family: Consolas;
+}
+.header-text {
+    position: absolute;
+    top: 100px;
+    letter-spacing: 2.5px;
+    color: white;
+    font-size: 36px;
+
+    font-family: Poppins;
+}
+
+.header {
+    background: rgba(20, 20, 20, 0.8);
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    padding: 180px;
+    z-index: 2;
+}
+
+.apple-tab {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background: linear-gradient(180deg, #000000 0%, rgba(53, 98, 101, 0.0729167) 99.99%, rgba(53, 98, 101, 0) 100%, rgba(255, 0, 0, 0) 100%);
+    box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.25);
+
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    background: #c4c4c4;
+    margin: 10px;
+}
+
+img {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 800px;
+    height: 800px;
+    z-index: 1;
+    opacity: 0.3;
+    mix-blend-mode: lighten;
+
+}
