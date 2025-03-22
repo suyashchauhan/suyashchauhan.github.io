@@ -1,0 +1,43 @@
+baseURL = 'https://suyashchauhan.github.io/'
+languageCode = 'en-us'
+title = 'Suyash'
+theme = ["PaperMod"]
+[menus]
+  [[menus.main]]
+    name = 'Posts'
+    pageRef = '/'
+    weight = 1
+  [[menus.main]]
+    name = 'Archive'
+    pageRef = '/archives/'
+    weight = 10
+  [[menus.main]]
+    name = 'About'
+    pageRef = '/about/'
+    weight = 10
+   
+[params]
+  env = "production"
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = false
+  ShowWordCount = true
+  [params.homeInfoParams]
+  Title = "👋 Hello, My Dear Internet Friend"
+  Content = "I'm Suyash. Welcome to my corner on the internet. I write about random Things here which I found interesting"
+  [[params.socialIcons]]
+    name = "x"
+    url = "https://x.com/su234234"
+
+    [[params.socialIcons]]
+    name = "linkedin"
+    url = "https://www.linkedin.com/in/suyash-chauhan/"
+
+    
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/suyashchauhan"
+
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Suyash</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Suyash</description>
+    <generator>Hugo -- 0.145.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 22 Mar 2025 23:43:00 +0530</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Sat, 22 Mar 2025 23:43:00 +0530</pubDate>
+      <guid>http://localhost:1313/about/</guid>
+      <description>&lt;p&gt;Welcome to my site!!&lt;/p&gt;
+&lt;h3 id=&#34;-pc-configuration&#34;&gt;🖥️ PC Configuration&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;- Processor: Intel i5 13500  
+- RAM: 16GB ddr4  
+- Storage: 512GB NVMe SSD + 512GB SATA SSD + 320GB HDD  
+- GPU:  Intel® UHD Graphics 770  
+- Case: Lian Li Lancool 205M  
+- OS: Windows 11 Pro / Ubuntu 22.04.5 LTS
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    <item>
+      <title>FirstPost</title>
+      <link>http://localhost:1313/posts/firstpost/</link>
+      <pubDate>Sat, 22 Mar 2025 22:29:11 +0530</pubDate>
+      <guid>http://localhost:1313/posts/firstpost/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;This is &lt;strong&gt;bold&lt;/strong&gt; text, and this is &lt;em&gt;emphasized&lt;/em&gt; text.&lt;/p&gt;
+&lt;p&gt;Visit the &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; website!&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
