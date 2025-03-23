@@ -2,9 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/posts/loremipsum/</loc>
-    <lastmod>2025-03-23T13:05:06+05:30</lastmod>
-  </url><url>
     <loc>http://localhost:1313/posts/</loc>
     <lastmod>2025-03-23T13:05:06+05:30</lastmod>
   </url><url>
@@ -13,9 +10,6 @@
   </url><url>
     <loc>http://localhost:1313/about/</loc>
     <lastmod>2025-03-22T23:43:00+05:30</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/firstpost/</loc>
-    <lastmod>2025-03-22T22:29:11+05:30</lastmod>
   </url><url>
     <loc>http://localhost:1313/archives/</loc>
   </url><url>

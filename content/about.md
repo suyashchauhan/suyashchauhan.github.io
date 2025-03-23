@@ -1,6 +1,5 @@
 +++
 date = '2025-03-22T23:43:00+05:30'
-draft = true
 title = 'About'
 url = "/about/"
 hideShare = true
