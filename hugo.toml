@@ -5,15 +5,15 @@ theme = ["PaperMod"]
 [menus]
   [[menus.main]]
     name = 'Posts'
-    pageRef = '/'
+    url = '/'
     weight = 1
   [[menus.main]]
     name = 'Archive'
-    pageRef = '/archives/'
+    url = '/archives/'
     weight = 10
   [[menus.main]]
     name = 'About'
-    pageRef = '/about/'
+    url = '/about/'
     weight = 10
    
 [params]
