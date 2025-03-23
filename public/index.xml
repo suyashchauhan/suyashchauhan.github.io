@@ -6,8 +6,25 @@
     <description>Recent content on Suyash</description>
     <generator>Hugo -- 0.145.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Mar 2025 23:43:00 +0530</lastBuildDate>
+    <lastBuildDate>Sun, 23 Mar 2025 13:05:06 +0530</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LoremIpsum</title>
+      <link>http://localhost:1313/posts/loremipsum/</link>
+      <pubDate>Sun, 23 Mar 2025 13:05:06 +0530</pubDate>
+      <guid>http://localhost:1313/posts/loremipsum/</guid>
+      <description>&lt;p&gt;Lorem ipsum dolor sit amet, &lt;em&gt;consectetur&lt;/em&gt; adipisicing elit, sed do eiusmod
+tempor incididunt ut &lt;strong&gt;labore et dolore magna aliqua&lt;/strong&gt;. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. &lt;em&gt;&lt;strong&gt;Duis aute irure dolor&lt;/strong&gt;&lt;/em&gt; in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. &lt;del&gt;Excepteur sint occaecat&lt;/del&gt; cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+&lt;h2 id=&#34;h2&#34;&gt;H2&lt;/h2&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, &lt;em&gt;consectetur&lt;/em&gt; adipisicing elit, sed do eiusmod
+tempor incididunt ut &lt;strong&gt;labore et dolore magna aliqua&lt;/strong&gt;. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>About</title>
       <link>http://localhost:1313/about/</link>
