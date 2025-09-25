@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.145.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.150.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="canonical" href="http://localhost:1313/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.f49d66caae9ea0fd43f21f29e71a8d3e284517ed770f2aa86fa012953ad3c9ef.css" integrity="sha256-9J1myq6eoP1D8h8p5xqNPihFF&#43;13Dyqob6ASlTrTye8=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.9d154986352072c257e0d06eb33f31f8e80be28dcf101847b77481430220caf9.css" integrity="sha256-nRVJhjUgcsJX4NBusz8x&#43;OgL4o3PEBhHt3SBQwIgyvk=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
@@ -178,6 +178,24 @@
 </div>
 
     </footer>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Viewmodel
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>How ViewModels are retained on Config Changes?
+Basic Terms ViewModelProvider ViewModelStore storage for viewmodel
+ViewModelStoreOwner interface which contains storage object and is implemented by ComponentActivity etc.
+Attaching ViewModel to activity MainActivity.kt
+1class MainActivity : AppCompatActivity() { 2 @RequiresApi(Build.VERSION_CODES.P) 3 private lateinit var viewModel: MyViewModel; 4 5 @RequiresApi(Build.VERSION_CODES.P) 6 override fun onCreate(savedInstanceState: Bundle?) { 7 super.onCreate(savedInstanceState) 8 enableEdgeToEdge() 9 setContentView(R.layout.activity_main) 10 11 viewModel = ViewModelProvider(this)[MyViewModel::class.java] 12 13 } 14}![alt text](image.png) Q: Aren’t we getting new viewmodel instance everytime as when configuration is changed onCreate is invoked again ?
+No
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-05-06 22:24:17 +0530 IST'>May 6, 2025</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;109 words</footer>
+  <a class="entry-link" aria-label="post link to Viewmodel" href="http://localhost:1313/posts/viewmodel/"></a>
 </article>
     </main>
     

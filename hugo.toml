@@ -2,6 +2,7 @@ baseURL = 'https://suyashchauhan.github.io/'
 languageCode = 'en-us'
 title = 'Suyash'
 theme = ["PaperMod"]
+markup.tableOfContents = { endLevel = 3, ordered = false, startLevel = 2 }
 [menus]
   [[menus.main]]
     name = 'Posts'

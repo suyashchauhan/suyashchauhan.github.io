@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Coroutines | Suyash</title>
+<meta name="keywords" content="">
+<meta name="description" content="What they are for ?
+write asynchronous or blocking code in such a fashion that it looks similar to unblocking code
+Some other options
+
+Threads
+Thread creation is expensive
+
+Threads
+1fun main() = runBlocking {
+2    repeat(50_000) { // launch a lot of threads
+3        thread {
+4            Thread.sleep(5000L)
+5            println(&#34;.&#34;)
+6        }
+7    }
+8}
+Coroutines">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/posts/coroutines/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.9d154986352072c257e0d06eb33f31f8e80be28dcf101847b77481430220caf9.css" integrity="sha256-nRVJhjUgcsJX4NBusz8x&#43;OgL4o3PEBhHt3SBQwIgyvk=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/coroutines/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="http://localhost:1313/posts/coroutines/">
+  <meta property="og:site_name" content="Suyash">
+  <meta property="og:title" content="Coroutines">
+  <meta property="og:description" content="What they are for ? write asynchronous or blocking code in such a fashion that it looks similar to unblocking code
+Some other options Threads
+Thread creation is expensive Threads
+1fun main() = runBlocking { 2 repeat(50_000) { // launch a lot of threads 3 thread { 4 Thread.sleep(5000L) 5 println(&#34;.&#34;) 6 } 7 } 8} Coroutines">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-05-11T15:02:02+05:30">
+    <meta property="article:modified_time" content="2025-05-11T15:02:02+05:30">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Coroutines">
+<meta name="twitter:description" content="What they are for ?
+write asynchronous or blocking code in such a fashion that it looks similar to unblocking code
+Some other options
+
+Threads
+Thread creation is expensive
+
+Threads
+1fun main() = runBlocking {
+2    repeat(50_000) { // launch a lot of threads
+3        thread {
+4            Thread.sleep(5000L)
+5            println(&#34;.&#34;)
+6        }
+7    }
+8}
+Coroutines">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Coroutines",
+      "item": "http://localhost:1313/posts/coroutines/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Coroutines",
+  "name": "Coroutines",
+  "description": "What they are for ? write asynchronous or blocking code in such a fashion that it looks similar to unblocking code\nSome other options Threads\nThread creation is expensive Threads\n1fun main() = runBlocking { 2 repeat(50_000) { // launch a lot of threads 3 thread { 4 Thread.sleep(5000L) 5 println(\u0026#34;.\u0026#34;) 6 } 7 } 8} Coroutines\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "What they are for ? write asynchronous or blocking code in such a fashion that it looks similar to unblocking code\nSome other options Threads\nThread creation is expensive Threads\n1fun main() = runBlocking { 2 repeat(50_000) { // launch a lot of threads 3 thread { 4 Thread.sleep(5000L) 5 println(\".\") 6 } 7 } 8} Coroutines\n1fun main() = runBlocking { 2 repeat(50_000) { // launch a lot of coroutines 3 launch { 4 delay(5000L) 5 println(\".\") 6 } 7 } 8} Callback style code RxJava Kotlin DSL Domain specific language\nKotlin is a statically typed language (type of a variable is known at compile time)\nKotlin functions are first-class, which means they can be stored in variables and data structures, and can be passed as arguments to and returned from other higher-order functions\nFunction Types -\u003e Kotlin uses this to represent functions\nFunction literals are functions that are not declared but are passed immediately as an expression\nLambda expressions and anonymous functions are function literals.\nreceiver type, which refers to the type being extended\nFunction types can optionally have an additional receiver type, which is specified before the dot in the notation: the type A.(B) -\u003e C represents functions that can be called on a receiver object A with a parameter B and return a value C (also called as “function types with reciever”)\nInside the body of the function literal, the receiver object passed to a call becomes an implicit this, so that you can access the members of that receiver object without any additional qualifiers, or access the receiver object using a this expression.\nSuspend functions When they are suspended, they return a Continuation suspend functions can only be called from inside coroutines or another suspending function suspend functions have the power to suspend the coroutines suspend functions are actually state machines with suspension points as states Who will store these states ? Continuation\n1/** 2 * Interface representing a continuation after a suspension point that returns a value of type `T`. 3 */ 4@SinceKotlin(\"1.3\") 5public interface Continuation\u003cin T\u003e { 6 /** 7 * The context of the coroutine that corresponds to this continuation. 8 */ 9 public val context: CoroutineContext 10 11 /** 12 * Resumes the execution of the corresponding coroutine passing a successful or failed [result] as the 13 * return value of the last suspension point. 14 */ 15 public fun resumeWith(result: Result) 16} When function a calls function b, the virtual machine needs to store the state of a somewhere, as well as the address where execution should return once b is finished. All this is stored in a structure called call stack\nCoroutine context , CoroutineScope , Shared Mutable state Coroutine Builder coroutine builder, a bridge from the normal to the suspending world launch and async are extension functions on CoroutineScope.\nlaunch\nstart a coroutine, and it will run independently runBlocking\nrunBlocking is a very atypical builder. It blocks the thread it has been started on whenever its coroutine is suspended async\nsimilar to launch, but it is designed to produce a value Coroutine scope To create a scope out of a suspending function, we use the coroutineScope function. 1public interface CoroutineScope { 2 /** 3 * The context of this scope. 4 * Context is encapsulated by the scope and used for implementation of coroutine builders that are extensions on the scope. 5 * Accessing this property in general code is not recommended for any purposes except accessing the [Job] instance for advanced usages. 6 * 7 * By convention, should contain an instance of a [job][Job] to enforce structured concurrency. 8 */ 9 public val coroutineContext: CoroutineContext 10} Structured concurrency A parent provides a scope for its children, and they are called in this scope. This builds a relationship that is called a structured concurrency. Here are the most important effects of the parent-child relationship:\nchildren inherit context from their parent (but they can also overwrite it, as will be explained in the Coroutine context chapter); a parent suspends until all the children are finished (this will be explained in the Job and children awaiting chapter); when the parent is cancelled, its child coroutines are cancelled too (this will be explained in the Cancellation chapter); when a child raises an error, it destroys the parent as well (this will be explained in the Exception handling chapter). Coroutine Context 1public interface CoroutineContext { 2 /** 3 * Returns the element with the given [key] from this context or `null`. 4 */ 5 public operator fun \u003cE : Element\u003e get(key: Key): E? 6 7 /** 8 * Accumulates entries of this context starting with [initial] value and applying [operation] 9 * from left to right to current accumulator value and each element of this context. 10 */ 11 public fun \u003cR\u003e fold(initial: R, operation: (R, Element) -\u003e R): R 12 13 /** 14 * Returns a context containing elements from this context and elements from other [context]. 15 * The elements from this context with the same key as in the other one are dropped. 16 */ 17 public operator fun plus(context: CoroutineContext): CoroutineContext = 18 if (context === EmptyCoroutineContext) this else // fast path -- avoid lambda creation 19 context.fold(this) { acc, element -\u003e 20 val removed = acc.minusKey(element.key) 21 if (removed === EmptyCoroutineContext) element else { 22 // make sure interceptor is always last in the context (and thus is fast to get when present) 23 val interceptor = removed[ContinuationInterceptor] 24 if (interceptor == null) CombinedContext(removed, element) else { 25 val left = removed.minusKey(ContinuationInterceptor) 26 if (left === EmptyCoroutineContext) CombinedContext(element, interceptor) else 27 CombinedContext(CombinedContext(left, element), interceptor) 28 } 29 } 30 } 31 32 /** 33 * Returns a context containing elements from this context, but without an element with 34 * the specified [key]. 35 */ 36 public fun minusKey(key: Key\u003c*\u003e): CoroutineContext 37 38 /** 39 * Key for the elements of [CoroutineContext]. [E] is a type of element with this key. 40 */ 41 public interface Key 42 43 /** 44 * An element of the [CoroutineContext]. An element of the coroutine context is a singleton context by itself. 45 */ 46 public interface Element : CoroutineContext { 47 /** 48 * A key of this coroutine context element. 49 */ 50 public val key: Key\u003c*\u003e 51 52 public override operator fun \u003cE : Element\u003e get(key: Key): E? = 53 @Suppress(\"UNCHECKED_CAST\") 54 if (this.key == key) this as E else null 55 56 public override fun \u003cR\u003e fold(initial: R, operation: (R, Element) -\u003e R): R = 57 operation(initial, this) 58 59 public override fun minusKey(key: Key\u003c*\u003e): CoroutineContext = 60 if (this.key == key) EmptyCoroutineContext else this 61 } 62} operations -\u003eplus, minus\nJob context a job represents a cancellable thing with a lifecycle each coroutine has its own job provider structured concurrency points 2,3,4 To check the state in code, we use the properties isActive, isCompleted, and isCancelled. Job is a coroutine context, we can access it using coroutineContext[Job]. When a coroutine has its own (independent) job, it has nearly no relation to its parent. It only inherits other contexts, but other results of the parent-child relationship will not apply. This causes us to lose structured concurrency, which is a problematic situation that should be avoided join method \u003e This is a suspending function that suspends until a concrete job reaches a final state (either Completed or Cancelled). 1public interface Job : CoroutineContext.Element { } Jobs states\nState isActive isCompleted isCancelled New (optional initial state) false false false Active (default initial state) true false false Completing (transient state) true false false Cancelling (transient state) false false true Cancelled (final state) false true true Completed (final state) false true false Cancellation cancellation is co-operative once a job is cancelled it cannot acts as a parent for any new coroutines ends the job at the first suspension point if job has children they are also cancelled Freeing up resources after cancellation\n1.\n1 2job.invokeOnCompletion { exception: Throwable? -\u003e 3 println(\"Finished\") 4 } 1finally { 2 println(\"Finally\") 3 withContext(NonCancellable) { 4 delay(1000L) 5 println(\"Cleanup done\") 6 } 7 } Q: How to do suspending tasks after cancellation ?\nIdeally after cancellation we can’t launch new coroutines\n1finally { 2 withContext(NonCancellable) { 3 println(\"job: I'm running finally\") 4 delay(1000L) 5 println(\"job: And I've just delayed for 1 sec because I'm non-cancellable\") 6 } 7 } Exception Handling Scope functions coroutineScope 1suspend fun getUserName() { 2 delay(1000) 3 println(\"User: suyash\") 4} 5 6suspend fun getUserData() { 7 delay(1000) 8 println(\"location, hobbies\") 9} 10 11 12suspend fun main() = coroutineScope { 13 printTime(\"begin\") 14 val userName = async { getUserName() } 15 val userData = async { getUserData() } 16 printTime(\"end ${userName.await()} ${userData.await()}\") 17 18} Dispatchers Main - the default one\nIO - when we block threads with I/O operations limit- 64 by default\nDefault - limit of 20 for mine\nlimitedParallelism used on Dispatchers.Default makes a dispatcher with an additional limit. Using limitedParallelism on Dispatcher.IO makes a dispatcher independent of Dispatcher.IO. However, they all share the same infinite pool of threads. Q: Dispatcher limited to a single thread ? Solves the shared state problems\nShared state problems Constructing a coroutine scope Channel why ? Share Information b/w coroutines\nChannel supports any number of senders and receivers, and every value that is sent to a channel is received only once.\nHot data streams are eager, produce elements independently of their consumption, and store the elements. Cold data streams are lazy, perform their operations on-demand, and store nothing.\nFlow References [1]\n",
+  "wordCount" : "1590",
+  "inLanguage": "en",
+  "datePublished": "2025-05-11T15:02:02+05:30",
+  "dateModified": "2025-05-11T15:02:02+05:30",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/coroutines/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Suyash",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Suyash (Alt + H)">Suyash</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/" title="Suyash">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives/" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Coroutines
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h1>
+    <div class="post-meta"><span title='2025-05-11 15:02:02 +0530 IST'>May 11, 2025</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;1590 words
+
+</div>
+  </header> 
+  <div class="post-content"><h3 id="what-they-are-for-">What they are for ?<a hidden class="anchor" aria-hidden="true" href="#what-they-are-for-">#</a></h3>
+<p>write asynchronous or blocking code in such a fashion that it looks similar to unblocking code</p>
+<h3 id="some-other-options">Some other options<a hidden class="anchor" aria-hidden="true" href="#some-other-options">#</a></h3>
+<ul>
+<li>Threads<br>
+Thread creation is expensive</li>
+</ul>
+<p>Threads</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">main</span>() = runBlocking {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>    repeat(<span style="color:#ae81ff">50</span>_000) { <span style="color:#75715e">// launch a lot of threads
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span><span style="color:#75715e"></span>        thread {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>            <span style="color:#a6e22e">Thread</span>.sleep(<span style="color:#ae81ff">5000L</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>            println(<span style="color:#e6db74">&#34;.&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>        }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>    }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span><span>}
+</span></span></code></pre></div><p>Coroutines</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">main</span>() = runBlocking {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>    repeat(<span style="color:#ae81ff">50</span>_000) { <span style="color:#75715e">// launch a lot of coroutines
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span><span style="color:#75715e"></span>        launch {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>            delay(<span style="color:#ae81ff">5000L</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>            println(<span style="color:#e6db74">&#34;.&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>        }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>    }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span><span>}
+</span></span></code></pre></div><ul>
+<li>Callback style code</li>
+<li>RxJava</li>
+</ul>
+<h3 id="kotlin-dsl">Kotlin DSL<a hidden class="anchor" aria-hidden="true" href="#kotlin-dsl">#</a></h3>
+<p>Domain specific language</p>
+<ul>
+<li>
+<p>Kotlin is a statically typed language (type of a variable is known at compile time)</p>
+</li>
+<li>
+<p>Kotlin functions are first-class, which means they can be stored in variables and data structures,
+and can be passed as arguments to and returned from other higher-order functions</p>
+</li>
+<li>
+<p>Function Types -&gt; Kotlin uses this to represent functions</p>
+</li>
+<li>
+<p>Function literals are functions that are not declared but are passed immediately as an expression</p>
+</li>
+<li>
+<p>Lambda expressions and anonymous functions are function literals.</p>
+</li>
+</ul>
+<p>receiver type, which refers to the type being extended</p>
+<p>Function types can optionally have an additional receiver type,
+which is specified before the dot in the notation: the type A.(B) -&gt; C represents functions
+that can be called on a receiver object A with a parameter B and return a value C (also called as &ldquo;function types with reciever&rdquo;)</p>
+<p>Inside the body of the function literal, the receiver object passed to a call becomes an implicit <strong>this</strong>, so that you can access the members of that receiver object without any additional qualifiers, or access the receiver object using a this expression.</p>
+<h2 id="suspend-functions">Suspend functions<a hidden class="anchor" aria-hidden="true" href="#suspend-functions">#</a></h2>
+<ul>
+<li>When they are suspended, they return a Continuation</li>
+<li>suspend functions can only be called from inside coroutines or another suspending function</li>
+<li>suspend functions have the power to suspend the coroutines</li>
+<li>suspend functions are actually state machines with suspension points as states</li>
+</ul>
+<h3 id="who-will-store-these-states-">Who will store these states ?<a hidden class="anchor" aria-hidden="true" href="#who-will-store-these-states-">#</a></h3>
+<p>Continuation</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#75715e"> * Interface representing a continuation after a suspension point that returns a value of type `T`.
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span><span style="color:#a6e22e">@SinceKotlin</span>(<span style="color:#e6db74">&#34;1.3&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Continuation</span>&lt;<span style="color:#66d9ef">in</span> T&gt; {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span><span style="color:#75715e">     * The context of the coroutine that corresponds to this continuation.
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">val</span> context: CoroutineContext
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span><span style="color:#75715e">     * Resumes the execution of the corresponding coroutine passing a successful or failed [result] as the
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span><span style="color:#75715e">     * return value of the last suspension point.
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">resumeWith</span>(result: Result&lt;T&gt;)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16</span><span>}
+</span></span></code></pre></div><p>When function a calls function b, the virtual machine needs to store the state of a somewhere, as well as the address where execution should return once b is finished. All this is stored in a structure called call stack</p>
+<ul>
+<li>Coroutine context , CoroutineScope , Shared Mutable state</li>
+</ul>
+<h2 id="coroutine-builder">Coroutine Builder<a hidden class="anchor" aria-hidden="true" href="#coroutine-builder">#</a></h2>
+<p>coroutine builder, a bridge from the normal to the suspending world
+launch and async are extension functions on CoroutineScope.</p>
+<p>launch</p>
+<ul>
+<li>start a coroutine, and it will run independently</li>
+</ul>
+<p>runBlocking</p>
+<ul>
+<li>runBlocking is a very atypical builder. It blocks the thread
+it has been started on whenever <strong>its</strong> coroutine is suspended</li>
+</ul>
+<p>async</p>
+<ul>
+<li>similar to launch, but it is designed to produce a value</li>
+</ul>
+<h2 id="coroutine-scope">Coroutine scope<a hidden class="anchor" aria-hidden="true" href="#coroutine-scope">#</a></h2>
+<ul>
+<li>To create a scope out of a suspending function, we use the coroutineScope function.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">CoroutineScope</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span><span style="color:#75715e">     * The context of this scope.
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span><span style="color:#75715e">     * Context is encapsulated by the scope and used for implementation of coroutine builders that are extensions on the scope.
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span><span style="color:#75715e">     * Accessing this property in general code is not recommended for any purposes except accessing the [Job] instance for advanced usages.
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span><span style="color:#75715e">     * By convention, should contain an instance of a [job][Job] to enforce structured concurrency.
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">val</span> coroutineContext: CoroutineContext
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>}
+</span></span></code></pre></div><h2 id="structured-concurrency">Structured concurrency<a hidden class="anchor" aria-hidden="true" href="#structured-concurrency">#</a></h2>
+<p>A parent provides a scope for its children, and they are called in this scope. This builds a relationship that is called a structured concurrency. Here are the most important effects of the parent-child relationship:</p>
+<ul>
+<li>children inherit context from their parent (but they can also overwrite it, as will be explained in the Coroutine context chapter);</li>
+<li>a parent suspends until all the children are finished (this will be explained in the Job and children awaiting chapter);</li>
+<li>when the parent is cancelled, its child coroutines are cancelled too (this will be explained in the Cancellation chapter);</li>
+<li>when a child raises an error, it destroys the parent as well (this will be explained in the Exception handling chapter).</li>
+</ul>
+<h2 id="coroutine-context">Coroutine Context<a hidden class="anchor" aria-hidden="true" href="#coroutine-context">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">CoroutineContext</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span><span style="color:#75715e">     * Returns the element with the given [key] from this context or `null`.
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">operator</span> <span style="color:#66d9ef">fun</span> &lt;<span style="color:#a6e22e">E</span> : <span style="color:#a6e22e">Element</span>&gt; <span style="color:#a6e22e">get</span>(key: Key&lt;E&gt;): E?
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span><span style="color:#75715e">     * Accumulates entries of this context starting with [initial] value and applying [operation]
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span><span style="color:#75715e">     * from left to right to current accumulator value and each element of this context.
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">fun</span> &lt;<span style="color:#a6e22e">R</span>&gt; <span style="color:#a6e22e">fold</span>(initial: R, operation: (R, Element) <span style="color:#f92672">-&gt;</span> R): R
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span><span style="color:#75715e">     * Returns a context containing elements from this context and elements from  other [context].
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span><span><span style="color:#75715e">     * The elements from this context with the same key as in the other one are dropped.
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16</span><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17</span><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">operator</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">plus</span>(context: CoroutineContext): CoroutineContext =
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18</span><span>        <span style="color:#66d9ef">if</span> (context <span style="color:#f92672">===</span> EmptyCoroutineContext) <span style="color:#66d9ef">this</span> <span style="color:#66d9ef">else</span> <span style="color:#75715e">// fast path -- avoid lambda creation
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19</span><span><span style="color:#75715e"></span>            context.fold(<span style="color:#66d9ef">this</span>) { acc, element <span style="color:#f92672">-&gt;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20</span><span>                <span style="color:#66d9ef">val</span> removed = acc.minusKey(element.key)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21</span><span>                <span style="color:#66d9ef">if</span> (removed <span style="color:#f92672">===</span> EmptyCoroutineContext) element <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22</span><span>                    <span style="color:#75715e">// make sure interceptor is always last in the context (and thus is fast to get when present)
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23</span><span><span style="color:#75715e"></span>                    <span style="color:#66d9ef">val</span> interceptor = removed[ContinuationInterceptor]
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24</span><span>                    <span style="color:#66d9ef">if</span> (interceptor <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) CombinedContext(removed, element) <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25</span><span>                        <span style="color:#66d9ef">val</span> left = removed.minusKey(ContinuationInterceptor)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26</span><span>                        <span style="color:#66d9ef">if</span> (left <span style="color:#f92672">===</span> EmptyCoroutineContext) CombinedContext(element, interceptor) <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27</span><span>                            CombinedContext(CombinedContext(left, element), interceptor)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28</span><span>                    }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29</span><span>                }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30</span><span>            }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32</span><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33</span><span><span style="color:#75715e">     * Returns a context containing elements from this context, but without an element with
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34</span><span><span style="color:#75715e">     * the specified [key].
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35</span><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36</span><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">minusKey</span>(key: Key&lt;*&gt;): CoroutineContext
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38</span><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39</span><span><span style="color:#75715e">     * Key for the elements of [CoroutineContext]. [E] is a type of element with this key.
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40</span><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41</span><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Key</span>&lt;E : Element&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43</span><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44</span><span><span style="color:#75715e">     * An element of the [CoroutineContext]. An element of the coroutine context is a singleton context by itself.
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45</span><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46</span><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Element</span> : CoroutineContext {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47</span><span>        <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48</span><span><span style="color:#75715e">         * A key of this coroutine context element.
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49</span><span><span style="color:#75715e">         */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50</span><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">val</span> key: Key&lt;*&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52</span><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">operator</span> <span style="color:#66d9ef">fun</span> &lt;<span style="color:#a6e22e">E</span> : <span style="color:#a6e22e">Element</span>&gt; <span style="color:#a6e22e">get</span>(key: Key&lt;E&gt;): E? =
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53</span><span>            <span style="color:#a6e22e">@Suppress</span>(<span style="color:#e6db74">&#34;UNCHECKED_CAST&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54</span><span>            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.key <span style="color:#f92672">==</span> key) <span style="color:#66d9ef">this</span> <span style="color:#66d9ef">as</span> E <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56</span><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> &lt;<span style="color:#a6e22e">R</span>&gt; <span style="color:#a6e22e">fold</span>(initial: R, operation: (R, Element) <span style="color:#f92672">-&gt;</span> R): R =
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57</span><span>            operation(initial, <span style="color:#66d9ef">this</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59</span><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">minusKey</span>(key: Key&lt;*&gt;): CoroutineContext =
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60</span><span>            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.key <span style="color:#f92672">==</span> key) EmptyCoroutineContext <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">this</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61</span><span>    }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62</span><span>}
+</span></span></code></pre></div><p>operations -&gt;plus, minus</p>
+<h2 id="job-context">Job context<a hidden class="anchor" aria-hidden="true" href="#job-context">#</a></h2>
+<ul>
+<li>a job represents a cancellable thing with a lifecycle</li>
+<li>each coroutine has its own job</li>
+<li>provider structured concurrency points 2,3,4</li>
+<li>To check the state in code, we use the properties isActive, isCompleted, and isCancelled.</li>
+<li>Job is a coroutine context, we can access it using coroutineContext[Job].</li>
+<li>When a coroutine has its own (independent) job, it has nearly no relation to its parent. It only inherits other contexts, but other results of the parent-child relationship will not apply. This causes us to lose structured concurrency, which is a problematic situation that should be avoided</li>
+<li>join method &gt; This is a suspending function that suspends until a concrete job reaches a final state (either Completed or Cancelled).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Job</span> : <span style="color:#a6e22e">CoroutineContext</span>.Element { }
+</span></span></code></pre></div><p>Jobs states</p>
+<table>
+  <thead>
+      <tr>
+          <th><strong>State</strong></th>
+          <th><strong>isActive</strong></th>
+          <th><strong>isCompleted</strong></th>
+          <th><strong>isCancelled</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>New <em>(optional initial state)</em></td>
+          <td>false</td>
+          <td>false</td>
+          <td>false</td>
+      </tr>
+      <tr>
+          <td>Active <em>(default initial state)</em></td>
+          <td>true</td>
+          <td>false</td>
+          <td>false</td>
+      </tr>
+      <tr>
+          <td>Completing <em>(transient state)</em></td>
+          <td>true</td>
+          <td>false</td>
+          <td>false</td>
+      </tr>
+      <tr>
+          <td>Cancelling <em>(transient state)</em></td>
+          <td>false</td>
+          <td>false</td>
+          <td>true</td>
+      </tr>
+      <tr>
+          <td>Cancelled <em>(final state)</em></td>
+          <td>false</td>
+          <td>true</td>
+          <td>true</td>
+      </tr>
+      <tr>
+          <td>Completed <em>(final state)</em></td>
+          <td>false</td>
+          <td>true</td>
+          <td>false</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="cancellation">Cancellation<a hidden class="anchor" aria-hidden="true" href="#cancellation">#</a></h2>
+<ul>
+<li>cancellation is <strong>co-operative</strong></li>
+<li>once a job is cancelled it cannot acts as a parent for any new coroutines</li>
+<li>ends the job at the first suspension point</li>
+<li>if job has children they are also cancelled</li>
+</ul>
+<p>Freeing up resources after cancellation<br>
+1.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>job.invokeOnCompletion { exception: Throwable? <span style="color:#f92672">-&gt;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>        println(<span style="color:#e6db74">&#34;Finished&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>    }
+</span></span></code></pre></div><ol start="2">
+<li></li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>            println(<span style="color:#e6db74">&#34;Finally&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>            withContext(NonCancellable) {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>                delay(<span style="color:#ae81ff">1000L</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>                println(<span style="color:#e6db74">&#34;Cleanup done&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>            }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>        }
+</span></span></code></pre></div><p><strong>Q: How to do suspending tasks after cancellation ?</strong><br>
+Ideally after cancellation we can&rsquo;t launch new coroutines</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>        withContext(NonCancellable) {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>            println(<span style="color:#e6db74">&#34;job: I&#39;m running finally&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>            delay(<span style="color:#ae81ff">1000L</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>            println(<span style="color:#e6db74">&#34;job: And I&#39;ve just delayed for 1 sec because I&#39;m non-cancellable&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>        }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>    }
+</span></span></code></pre></div><h2 id="exception-handling">Exception Handling<a hidden class="anchor" aria-hidden="true" href="#exception-handling">#</a></h2>
+<h2 id="scope-functions">Scope functions<a hidden class="anchor" aria-hidden="true" href="#scope-functions">#</a></h2>
+<ul>
+<li>coroutineScope</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#66d9ef">suspend</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">getUserName</span>() {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>    delay(<span style="color:#ae81ff">1000</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>    println(<span style="color:#e6db74">&#34;User: suyash&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span><span style="color:#66d9ef">suspend</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">getUserData</span>() {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>    delay(<span style="color:#ae81ff">1000</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>    println(<span style="color:#e6db74">&#34;location, hobbies&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span><span style="color:#66d9ef">suspend</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">main</span>() = coroutineScope {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span>    printTime(<span style="color:#e6db74">&#34;begin&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span>    <span style="color:#66d9ef">val</span> userName = async { getUserName() }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span><span>    <span style="color:#66d9ef">val</span> userData = async { getUserData() }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16</span><span>    printTime(<span style="color:#e6db74">&#34;end </span><span style="color:#e6db74">${userName.await()}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">${userData.await()}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18</span><span>}
+</span></span></code></pre></div><h2 id="dispatchers">Dispatchers<a hidden class="anchor" aria-hidden="true" href="#dispatchers">#</a></h2>
+<p>Main - the default one<br>
+IO - when we block threads with I/O operations limit- 64 by default<br>
+Default - limit of 20 for mine</p>
+<ul>
+<li>limitedParallelism used on Dispatchers.Default makes a dispatcher with an additional limit. Using limitedParallelism on Dispatcher.IO makes a dispatcher independent of Dispatcher.IO.
+However, they all share the same infinite pool of threads.</li>
+</ul>
+<p><strong>Q: Dispatcher limited to a single thread ?</strong>
+Solves the shared state problems</p>
+<h2 id="shared-state-problems">Shared state problems<a hidden class="anchor" aria-hidden="true" href="#shared-state-problems">#</a></h2>
+<h2 id="constructing-a-coroutine-scope">Constructing a coroutine scope<a hidden class="anchor" aria-hidden="true" href="#constructing-a-coroutine-scope">#</a></h2>
+<h2 id="channel">Channel<a hidden class="anchor" aria-hidden="true" href="#channel">#</a></h2>
+<p>why ? Share Information b/w coroutines</p>
+<p>Channel supports any number of senders and receivers, and every value that is sent to a channel is received only once.</p>
+<p>Hot data streams are eager, produce elements independently of their consumption,
+and store the elements. Cold data streams are lazy, perform their operations on-demand, and store nothing.</p>
+<h2 id="flow">Flow<a hidden class="anchor" aria-hidden="true" href="#flow">#</a></h2>
+<h3 id="references">References<a hidden class="anchor" aria-hidden="true" href="#references">#</a></h3>
+<p>[1]</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/posts/appwidgets/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>AppWidgets</span>
+  </a>
+  <a class="next" href="http://localhost:1313/posts/viewmodel/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Viewmodel</span>
+  </a>
+</nav>
+
+
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Coroutines on x"
+            href="https://x.com/intent/tweet/?text=Coroutines&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fcoroutines%2f&amp;hashtags=">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Coroutines on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fcoroutines%2f&amp;title=Coroutines&amp;summary=Coroutines&amp;source=http%3a%2f%2flocalhost%3a1313%2fposts%2fcoroutines%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Coroutines on reddit"
+            href="https://reddit.com/submit?url=http%3a%2f%2flocalhost%3a1313%2fposts%2fcoroutines%2f&title=Coroutines">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Coroutines on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fposts%2fcoroutines%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Coroutines on whatsapp"
+            href="https://api.whatsapp.com/send?text=Coroutines%20-%20http%3a%2f%2flocalhost%3a1313%2fposts%2fcoroutines%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Coroutines on telegram"
+            href="https://telegram.me/share/url?text=Coroutines&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fcoroutines%2f">
+            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Coroutines on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=Coroutines&u=http%3a%2f%2flocalhost%3a1313%2fposts%2fcoroutines%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
+    </li>
+</ul>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">Suyash</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

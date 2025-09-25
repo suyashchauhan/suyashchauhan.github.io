@@ -4,19 +4,63 @@
     <title>Suyash</title>
     <link>http://localhost:1313/</link>
     <description>Recent content on Suyash</description>
-    <generator>Hugo -- 0.145.0</generator>
+    <generator>Hugo -- 0.150.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Mar 2025 23:43:00 +0530</lastBuildDate>
+    <lastBuildDate>Tue, 06 May 2025 22:24:17 +0530</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Viewmodel</title>
+      <link>http://localhost:1313/posts/viewmodel/</link>
+      <pubDate>Tue, 06 May 2025 22:24:17 +0530</pubDate>
+      <guid>http://localhost:1313/posts/viewmodel/</guid>
+      <description>&lt;p&gt;How ViewModels are retained on Config Changes?&lt;/p&gt;
+&lt;h3 id=&#34;basic-terms&#34;&gt;Basic Terms&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;ViewModelProvider&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt=&#34;alt text&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/viewModel.png&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ViewModelStore&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;storage for viewmodel&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;img alt=&#34;alt text&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/viewModel-2.png&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ViewModelStoreOwner&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;interface which contains storage object and is implemented by ComponentActivity etc.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;img alt=&#34;alt text&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/viewModel-5.png&#34;&gt;
+&lt;img alt=&#34;alt text&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/viewModel-6.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;attaching-viewmodel-to-activity&#34;&gt;Attaching ViewModel to activity&lt;/h3&gt;
+&lt;p&gt;MainActivity.kt&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kt&#34; data-lang=&#34;kt&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 1&lt;/span&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MainActivity&lt;/span&gt; : AppCompatActivity() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 2&lt;/span&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;@RequiresApi&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;Build&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;VERSION_CODES&lt;/span&gt;.P)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 3&lt;/span&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;lateinit&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; viewModel: MyViewModel;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 4&lt;/span&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 5&lt;/span&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;@RequiresApi&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;Build&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;VERSION_CODES&lt;/span&gt;.P)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 6&lt;/span&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;override&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;fun&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;onCreate&lt;/span&gt;(savedInstanceState: Bundle?) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 7&lt;/span&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;super&lt;/span&gt;.onCreate(savedInstanceState)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 8&lt;/span&gt;&lt;span&gt;        enableEdgeToEdge()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 9&lt;/span&gt;&lt;span&gt;        setContentView(&lt;span style=&#34;color:#a6e22e&#34;&gt;R&lt;/span&gt;.layout.activity_main)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;10&lt;/span&gt;&lt;span&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;11&lt;/span&gt;&lt;span&gt;        viewModel = ViewModelProvider(&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;)[MyViewModel&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt;.java]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;12&lt;/span&gt;&lt;span&gt;       
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;13&lt;/span&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;14&lt;/span&gt;&lt;span&gt;}![alt text](image.png)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Q: Aren&amp;rsquo;t we getting new viewmodel instance everytime as when configuration is changed onCreate is invoked again ?&lt;/strong&gt;&lt;br&gt;
+No&lt;/p&gt;</description>
+    </item>
     <item>
       <title>About</title>
       <link>http://localhost:1313/about/</link>
       <pubDate>Sat, 22 Mar 2025 23:43:00 +0530</pubDate>
       <guid>http://localhost:1313/about/</guid>
-      <description>&lt;p&gt;Welcome to my site!!&lt;/p&gt;
+      <description>&lt;p&gt;This is my personal website.
+I use this to document my learnings and same time sharing this with others.&lt;/p&gt;
 &lt;h3 id=&#34;-pc-configuration&#34;&gt;🖥️ PC Configuration&lt;/h3&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;- Processor: Intel i5 13500  
-- RAM: 16GB ddr4  
+- RAM: 16GB DDR4  
 - Storage: 512GB NVMe SSD + 512GB SATA SSD + 320GB HDD  
 - GPU:  Intel® UHD Graphics 770  
 - Case: Lian Li Lancool 205M  
