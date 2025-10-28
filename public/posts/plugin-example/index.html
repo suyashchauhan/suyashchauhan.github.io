@@ -12,6 +12,7 @@
 Assume having an App with some functions that can be customized by the user
 The App already has some, but users want more :|
 This is a very very basic example on how that can be done
+
 Idea
 1. Plugin App (where the customizations lives) have a service with a custom action (ex - com.example.contexttheme.PLUGIN )
 2. Use PackageManager to get the Apps with custom action
@@ -137,6 +138,7 @@ Idea 1. Plugin App (where the customizations lives) have a service with a custom
 Assume having an App with some functions that can be customized by the user
 The App already has some, but users want more :|
 This is a very very basic example on how that can be done
+
 Idea
 1. Plugin App (where the customizations lives) have a service with a custom action (ex - com.example.contexttheme.PLUGIN )
 2. Use PackageManager to get the Apps with custom action
@@ -331,7 +333,8 @@ Custom classes implemented in Plugin APKs
 <blockquote>
 <p>Assume having an App with some functions that can be customized by the user
 The App already has some, but users want <strong>more</strong> :|
-This is a very very basic example on how that can be done</p></blockquote>
+This is a very very basic example on how that can be done</p>
+</blockquote>
 <h3 id="idea">Idea<a hidden class="anchor" aria-hidden="true" href="#idea">#</a></h3>
 <pre tabindex="0"><code>1. Plugin App (where the customizations lives) have a service with a custom action (ex - com.example.contexttheme.PLUGIN )
 2. Use PackageManager to get the Apps with custom action
@@ -481,7 +484,36 @@ This is a very very basic example on how that can be done</p></blockquote>
     </li>
 </ul>
 
-  </footer>
+  </footer><script src="https://giscus.app/client.js" data-repo="suyashchauhan/suyashchauhan.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkxNTM2NzIyNjQ=" data-category="Blog Discussions"
+        data-category-id="DIC_kwDOCSjaSM4CxGRF" data-mapping="pathname" data-strict="0" data-reactions-enabled="1"
+        data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en"
+        data-loading="lazy" crossorigin="anonymous" async>
+        </script>
+<script>
+        window.addEventListener("DOMContentLoaded", function () {
+                const getStoredTheme = () => localStorage.getItem("pref-theme") === "dark" ? "dark" : "light";
+
+                const setGiscusTheme = () => {
+                        const sendMessage = (message) => {
+                                const iframe = document.querySelector('iframe.giscus-frame');
+                                if (iframe) {
+                                        iframe.contentWindow.postMessage({ giscus: message }, '*');
+                                }
+                        }
+                        sendMessage({ setConfig: { theme: getStoredTheme() } })
+                }
+
+                const themeSwitcher = document.getElementById("theme-toggle");
+                if (themeSwitcher) {
+                        themeSwitcher.addEventListener("click", () => setTimeout(setGiscusTheme, 300));
+                }
+                setTimeout(setGiscusTheme, 1000)
+
+        })
+
+
+</script>
 </article>
     </main>
     

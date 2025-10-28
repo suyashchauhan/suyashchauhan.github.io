@@ -38,6 +38,8 @@ postgres@user-B760M:~$ psql
 \c mydb
 # directly
 psql -d db_name
+# from an external url 
+psql postgresql://libmgmtdb_user:xOpWmuHy1eJItkYLAqaJCyPiq5etX0fz@ppg-d3ka8t7fte5s7387ssj0-a.oregon-postgres.render.com/libmgmtdb
 ```
 
 ## List Tables 

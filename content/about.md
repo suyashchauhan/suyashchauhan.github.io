@@ -3,6 +3,7 @@ date = '2025-03-22T23:43:00+05:30'
 title = 'About'
 url = "/about/"
 hideShare = true
+comments = false
 +++
 
 This is my personal website.

@@ -149,6 +149,25 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Android Plugin App Example
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Why ? Assume having an App with some functions that can be customized by the user The App already has some, but users want more :| This is a very very basic example on how that can be done
+Idea 1. Plugin App (where the customizations lives) have a service with a custom action (ex - com.example.contexttheme.PLUGIN ) 2. Use PackageManager to get the Apps with custom action 3. Finally Using ClassLoaders to get classess and invoking methods on them to get results Getting Plugins with required action 1val pm = this.packageManager 2val list = pm.queryIntentServices(Intent(&#34;com.example.contexttheme.PLUGIN&#34;), 0) 3val textViewIds = arrayOf(R.id.plugin_text1, R.id.plugin_text2) 4Log.i(&#34;gggg&#34;, &#34;size = ${list.size}&#34;); 5 6for (i in list.indices) { 7 try { 8 Log.i(&#34;gggg&#34;, &#34;li serviceInfo = &#34; &#43; list[i].serviceInfo.name); 9 val appInfo = pm.getApplicationInfo(list[i].serviceInfo.packageName, 0) 10 val apkPath = appInfo.sourceDir 11 Log.i(&#34;gggg&#34;, &#34;path = ${apkPath}&#34;) 12 val dir = getDir(&#34;dex_opt&#34;, Context.MODE_PRIVATE) 13 val classLoader = PathClassLoader(apkPath, javaClass.classLoader) 14 15 val pluginClass = 16 classLoader.loadClass(&#34;com.example.plugin${i}.PluginTextProvider&#34;) 17 val pluginInstance = pluginClass.newInstance() 18 19 val textMethod = pluginClass.getMethod(&#34;getText&#34;) 20 val text: String = textMethod.invoke(pluginInstance).toString() 21 Log.i(&#34;gggg&#34;, &#34;text for = ${text}&#34;) 22 val textView: TextView = findViewById(textViewIds[i]) 23 textView.text = text 24 } catch (e: Exception) { 25 Log.e(&#34;gggg&#34;, &#34;Print exception ${e.message}&#34;) 26 e.printStackTrace() 27 } 28} Main App Manifest 1&lt;queries&gt; 2 &lt;intent&gt; 3 &lt;action android:name=&#34;com.example.contexttheme.PLUGIN&#34; /&gt; 4 &lt;/intent&gt; 5&lt;/queries&gt; Plugin App Manifest 1&lt;service 2 android:name=&#34;.MyService&#34; 3 android:exported=&#34;true&#34;&gt; 4 &lt;intent-filter&gt; 5 &lt;action android:name=&#34;com.example.contexttheme.PLUGIN&#34;&gt;&lt;/action&gt; 6 &lt;/intent-filter&gt; 7&lt;/service&gt; Custom classes implemented in Plugin APKs 1// Plugin2 Apk 2class PluginTextProvider { 3 public fun getText() = &#34;Hello from plugin2&#34; 4} 5 6// Plugin1 Apk 7class PluginTextProvider { 8 public fun getText() = &#34;Hello from plugin1&#34; 9} </p>
+  </div>
+  <footer class="entry-footer"><span title='2025-04-20 17:32:39 +0530 IST'>April 20, 2025</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;273 words</footer>
+  <a class="entry-link" aria-label="post link to Android Plugin App Example" href="http://localhost:1313/posts/plugin-example/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">LoremIpsum
       <span class="entry-hint" title="Draft">
         <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">

@@ -25,6 +25,7 @@ markup.tableOfContents = { endLevel = 3, ordered = false, startLevel = 2 }
   ShowBreadCrumbs = true
   ShowCodeCopyButtons = false
   ShowWordCount = true
+  comments = true
   [params.homeInfoParams]
   Title = "👋 Hello, My Dear Internet Friend"
   Content = "I'm Suyash. Welcome to my corner on the internet. I write about random Things here which I found interesting"

@@ -20,10 +20,12 @@ ViewModelStore
 storage for viewmodel
 
 
+
 ViewModelStoreOwner
 
 
 interface which contains storage object and is implemented by ComponentActivity etc.
+
 
 
 Attaching ViewModel to activity
@@ -120,10 +122,12 @@ ViewModelStore
 storage for viewmodel
 
 
+
 ViewModelStoreOwner
 
 
 interface which contains storage object and is implemented by ComponentActivity etc.
+
 
 
 Attaching ViewModel to activity
@@ -277,13 +281,15 @@ No">
 <li>ViewModelStore</li>
 </ul>
 <blockquote>
-<p>storage for viewmodel</p></blockquote>
+<p>storage for viewmodel</p>
+</blockquote>
 <p><img alt="alt text" loading="lazy" src="/images/viewModel-2.png"></p>
 <ul>
 <li>ViewModelStoreOwner</li>
 </ul>
 <blockquote>
-<p>interface which contains storage object and is implemented by ComponentActivity etc.</p></blockquote>
+<p>interface which contains storage object and is implemented by ComponentActivity etc.</p>
+</blockquote>
 <p><img alt="alt text" loading="lazy" src="/images/viewModel-5.png">
 <img alt="alt text" loading="lazy" src="/images/viewModel-6.png"></p>
 <h3 id="attaching-viewmodel-to-activity">Attaching ViewModel to activity<a hidden class="anchor" aria-hidden="true" href="#attaching-viewmodel-to-activity">#</a></h3>
@@ -314,6 +320,18 @@ No</p>
   <footer class="post-footer">
     <ul class="post-tags">
     </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/posts/coroutines/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Coroutines</span>
+  </a>
+  <a class="next" href="http://localhost:1313/posts/nas/">
+    <span class="title">Next »</span>
+    <br>
+    <span>DIY NAS or Home Server</span>
+  </a>
+</nav>
 
 
 <ul class="share-buttons">
@@ -383,7 +401,36 @@ No</p>
     </li>
 </ul>
 
-  </footer>
+  </footer><script src="https://giscus.app/client.js" data-repo="suyashchauhan/suyashchauhan.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkxNTM2NzIyNjQ=" data-category="Blog Discussions"
+        data-category-id="DIC_kwDOCSjaSM4CxGRF" data-mapping="pathname" data-strict="0" data-reactions-enabled="1"
+        data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en"
+        data-loading="lazy" crossorigin="anonymous" async>
+        </script>
+<script>
+        window.addEventListener("DOMContentLoaded", function () {
+                const getStoredTheme = () => localStorage.getItem("pref-theme") === "dark" ? "dark" : "light";
+
+                const setGiscusTheme = () => {
+                        const sendMessage = (message) => {
+                                const iframe = document.querySelector('iframe.giscus-frame');
+                                if (iframe) {
+                                        iframe.contentWindow.postMessage({ giscus: message }, '*');
+                                }
+                        }
+                        sendMessage({ setConfig: { theme: getStoredTheme() } })
+                }
+
+                const themeSwitcher = document.getElementById("theme-toggle");
+                if (themeSwitcher) {
+                        themeSwitcher.addEventListener("click", () => setTimeout(setGiscusTheme, 300));
+                }
+                setTimeout(setGiscusTheme, 1000)
+
+        })
+
+
+</script>
 </article>
     </main>
     

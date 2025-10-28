@@ -23,6 +23,8 @@ Connect to DB
 \c mydb
 # directly
 psql -d db_name
+# from an external url 
+psql postgresql://libmgmtdb_user:xOpWmuHy1eJItkYLAqaJCyPiq5etX0fz@ppg-d3ka8t7fte5s7387ssj0-a.oregon-postgres.render.com/libmgmtdb
 List Tables
 \dt
 About Tables
@@ -83,7 +85,7 @@ SELECT application_name FROM pg_stat_activity WHERE datname =&#39;db_name&#39;;
   <meta property="og:title" content="Postgres">
   <meta property="og:description" content="linux list all users cut -d: -f1 /etc/passwd switch to postgres user switching to postgres user as this user has some extended privileges may be in order to prevent random users changing properties
 sudo -i -u postgres launch psql Now in order to interact with PostgresSQL Database server we need to connect to CLI i.e psql
-postgres@user-B760M:~$ psql List all DB \l Connect to DB # switch to mydb \c mydb # directly psql -d db_name List Tables \dt About Tables \d table_name Get applications having connection with DB # why ? we can&#39;t drop db if there is a connection SELECT application_name FROM pg_stat_activity WHERE datname =&#39;db_name&#39;; ">
+postgres@user-B760M:~$ psql List all DB \l Connect to DB # switch to mydb \c mydb # directly psql -d db_name # from an external url psql postgresql://libmgmtdb_user:xOpWmuHy1eJItkYLAqaJCyPiq5etX0fz@ppg-d3ka8t7fte5s7387ssj0-a.oregon-postgres.render.com/libmgmtdb List Tables \dt About Tables \d table_name Get applications having connection with DB # why ? we can&#39;t drop db if there is a connection SELECT application_name FROM pg_stat_activity WHERE datname =&#39;db_name&#39;; ">
   <meta property="og:locale" content="en-us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -107,6 +109,8 @@ Connect to DB
 \c mydb
 # directly
 psql -d db_name
+# from an external url 
+psql postgresql://libmgmtdb_user:xOpWmuHy1eJItkYLAqaJCyPiq5etX0fz@ppg-d3ka8t7fte5s7387ssj0-a.oregon-postgres.render.com/libmgmtdb
 List Tables
 \dt
 About Tables
@@ -143,12 +147,12 @@ SELECT application_name FROM pg_stat_activity WHERE datname =&#39;db_name&#39;;
   "@type": "BlogPosting",
   "headline": "Postgres",
   "name": "Postgres",
-  "description": "linux list all users cut -d: -f1 /etc/passwd switch to postgres user switching to postgres user as this user has some extended privileges may be in order to prevent random users changing properties\nsudo -i -u postgres launch psql Now in order to interact with PostgresSQL Database server we need to connect to CLI i.e psql\npostgres@user-B760M:~$ psql List all DB \\l Connect to DB # switch to mydb \\c mydb # directly psql -d db_name List Tables \\dt About Tables \\d table_name Get applications having connection with DB # why ? we can\u0026#39;t drop db if there is a connection SELECT application_name FROM pg_stat_activity WHERE datname =\u0026#39;db_name\u0026#39;; ",
+  "description": "linux list all users cut -d: -f1 /etc/passwd switch to postgres user switching to postgres user as this user has some extended privileges may be in order to prevent random users changing properties\nsudo -i -u postgres launch psql Now in order to interact with PostgresSQL Database server we need to connect to CLI i.e psql\npostgres@user-B760M:~$ psql List all DB \\l Connect to DB # switch to mydb \\c mydb # directly psql -d db_name # from an external url psql postgresql://libmgmtdb_user:xOpWmuHy1eJItkYLAqaJCyPiq5etX0fz@ppg-d3ka8t7fte5s7387ssj0-a.oregon-postgres.render.com/libmgmtdb List Tables \\dt About Tables \\d table_name Get applications having connection with DB # why ? we can\u0026#39;t drop db if there is a connection SELECT application_name FROM pg_stat_activity WHERE datname =\u0026#39;db_name\u0026#39;; ",
   "keywords": [
     
   ],
-  "articleBody": "linux list all users cut -d: -f1 /etc/passwd switch to postgres user switching to postgres user as this user has some extended privileges may be in order to prevent random users changing properties\nsudo -i -u postgres launch psql Now in order to interact with PostgresSQL Database server we need to connect to CLI i.e psql\npostgres@user-B760M:~$ psql List all DB \\l Connect to DB # switch to mydb \\c mydb # directly psql -d db_name List Tables \\dt About Tables \\d table_name Get applications having connection with DB # why ? we can't drop db if there is a connection SELECT application_name FROM pg_stat_activity WHERE datname ='db_name'; ",
-  "wordCount" : "108",
+  "articleBody": "linux list all users cut -d: -f1 /etc/passwd switch to postgres user switching to postgres user as this user has some extended privileges may be in order to prevent random users changing properties\nsudo -i -u postgres launch psql Now in order to interact with PostgresSQL Database server we need to connect to CLI i.e psql\npostgres@user-B760M:~$ psql List all DB \\l Connect to DB # switch to mydb \\c mydb # directly psql -d db_name # from an external url psql postgresql://libmgmtdb_user:xOpWmuHy1eJItkYLAqaJCyPiq5etX0fz@ppg-d3ka8t7fte5s7387ssj0-a.oregon-postgres.render.com/libmgmtdb List Tables \\dt About Tables \\d table_name Get applications having connection with DB # why ? we can't drop db if there is a connection SELECT application_name FROM pg_stat_activity WHERE datname ='db_name'; ",
+  "wordCount" : "115",
   "inLanguage": "en",
   "datePublished": "2025-06-09T23:10:03+05:30",
   "dateModified": "2025-06-09T23:10:03+05:30",
@@ -240,7 +244,7 @@ SELECT application_name FROM pg_stat_activity WHERE datname =&#39;db_name&#39;;
         </svg>
       </span>
     </h1>
-    <div class="post-meta"><span title='2025-06-09 23:10:03 +0530 IST'>June 9, 2025</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;108 words
+    <div class="post-meta"><span title='2025-06-09 23:10:03 +0530 IST'>June 9, 2025</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;115 words
 
 </div>
   </header> 
@@ -260,6 +264,8 @@ may be in order to prevent random users changing properties</p>
 </span></span><span style="display:flex;"><span><span style="color:#ae81ff">\c</span> mydb
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># directly</span>
 </span></span><span style="display:flex;"><span>psql -d db_name
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># from an external url </span>
+</span></span><span style="display:flex;"><span>psql postgresql://libmgmtdb_user:xOpWmuHy1eJItkYLAqaJCyPiq5etX0fz@ppg-d3ka8t7fte5s7387ssj0-a.oregon-postgres.render.com/libmgmtdb
 </span></span></code></pre></div><h2 id="list-tables">List Tables<a hidden class="anchor" aria-hidden="true" href="#list-tables">#</a></h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#ae81ff">\d</span>t
 </span></span></code></pre></div><h2 id="about-tables">About Tables<a hidden class="anchor" aria-hidden="true" href="#about-tables">#</a></h2>
@@ -355,7 +361,36 @@ may be in order to prevent random users changing properties</p>
     </li>
 </ul>
 
-  </footer>
+  </footer><script src="https://giscus.app/client.js" data-repo="suyashchauhan/suyashchauhan.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkxNTM2NzIyNjQ=" data-category="Blog Discussions"
+        data-category-id="DIC_kwDOCSjaSM4CxGRF" data-mapping="pathname" data-strict="0" data-reactions-enabled="1"
+        data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en"
+        data-loading="lazy" crossorigin="anonymous" async>
+        </script>
+<script>
+        window.addEventListener("DOMContentLoaded", function () {
+                const getStoredTheme = () => localStorage.getItem("pref-theme") === "dark" ? "dark" : "light";
+
+                const setGiscusTheme = () => {
+                        const sendMessage = (message) => {
+                                const iframe = document.querySelector('iframe.giscus-frame');
+                                if (iframe) {
+                                        iframe.contentWindow.postMessage({ giscus: message }, '*');
+                                }
+                        }
+                        sendMessage({ setConfig: { theme: getStoredTheme() } })
+                }
+
+                const themeSwitcher = document.getElementById("theme-toggle");
+                if (themeSwitcher) {
+                        themeSwitcher.addEventListener("click", () => setTimeout(setGiscusTheme, 300));
+                }
+                setTimeout(setGiscusTheme, 1000)
+
+        })
+
+
+</script>
 </article>
     </main>
     

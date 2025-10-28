@@ -205,6 +205,11 @@
     <ul class="post-tags">
     </ul>
 <nav class="paginav">
+  <a class="prev" href="http://localhost:1313/posts/kafka/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Kafka</span>
+  </a>
   <a class="next" href="http://localhost:1313/posts/compose/">
     <span class="title">Next »</span>
     <br>
@@ -280,7 +285,36 @@
     </li>
 </ul>
 
-  </footer>
+  </footer><script src="https://giscus.app/client.js" data-repo="suyashchauhan/suyashchauhan.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkxNTM2NzIyNjQ=" data-category="Blog Discussions"
+        data-category-id="DIC_kwDOCSjaSM4CxGRF" data-mapping="pathname" data-strict="0" data-reactions-enabled="1"
+        data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en"
+        data-loading="lazy" crossorigin="anonymous" async>
+        </script>
+<script>
+        window.addEventListener("DOMContentLoaded", function () {
+                const getStoredTheme = () => localStorage.getItem("pref-theme") === "dark" ? "dark" : "light";
+
+                const setGiscusTheme = () => {
+                        const sendMessage = (message) => {
+                                const iframe = document.querySelector('iframe.giscus-frame');
+                                if (iframe) {
+                                        iframe.contentWindow.postMessage({ giscus: message }, '*');
+                                }
+                        }
+                        sendMessage({ setConfig: { theme: getStoredTheme() } })
+                }
+
+                const themeSwitcher = document.getElementById("theme-toggle");
+                if (themeSwitcher) {
+                        themeSwitcher.addEventListener("click", () => setTimeout(setGiscusTheme, 300));
+                }
+                setTimeout(setGiscusTheme, 1000)
+
+        })
+
+
+</script>
 </article>
     </main>
     
