@@ -16,6 +16,10 @@ markup.tableOfContents = { endLevel = 3, ordered = false, startLevel = 2 }
     name = 'About'
     pageRef = '/about/'
     weight = 10
+  [[menus.main]]
+    name = 'Bookshelf'
+    pageRef = '/bookshelf/'
+    weight = 15
    
 [params]
   env = "production"
