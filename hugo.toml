@@ -19,7 +19,11 @@ markup.tableOfContents = { endLevel = 3, ordered = false, startLevel = 2 }
   [[menus.main]]
     name = 'Bookshelf'
     pageRef = '/bookshelf/'
-    weight = 15
+    weight = 10
+  [[menus.main]]
+    name = 'Search'
+    pageRef = '/search/'
+    weight = 10
    
 [params]
   env = "production"
@@ -46,4 +50,6 @@ markup.tableOfContents = { endLevel = 3, ordered = false, startLevel = 2 }
     name = "github"
     url = "https://github.com/suyashchauhan"
 
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
 

@@ -2,6 +2,8 @@
 title =  "Bookshelf"
 comments = false
 hideShare = true
+ShowReadingTime = false
+ShowWordCount = false
 +++
 
 ## Technical
